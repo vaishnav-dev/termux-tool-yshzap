@@ -8,8 +8,8 @@ yellow="\e[33m"
 reset="\e[0m"
 
 clear
-echo -e "${green}█▀█ █▀▀ █▀█ █▄░█ ▀█▀ █▀▀ ▄▀█ █▄░█${reset}"
-echo -e "${red}█▀▄ ██▄ █▄█ █░▀█ ░█░ ██▄ █▀█ █░▀█${reset}"
+echo -e "${green}█▄█ █▀ █░█ ▀█ ▄▀█ █▀█${reset}"
+echo -e "${red}░█░ ▄█ █▀█ █▄ █▀█ █▀▀${reset}"
 echo -e "${yellow}Y'SHZ∆P Tool - By Vaishnav🦊${reset}"
 echo -e "${blue}--------------------------------------${reset}"
 
@@ -28,7 +28,7 @@ while [ $SECONDS -lt $end ]; do
 done
 
 echo ""
-echo -e "${green}100% Hack Successful!${reset}"
+echo -e "${green}100% Cracking Successful!${reset}"
 sleep 1
 echo -e "${blue}--------------------------------------${reset}"
 echo -e "${yellow}Target Number: $target${reset}"
@@ -37,4 +37,4 @@ echo -e "${red}Encrypted Messages: Cracked${reset}"
 echo -e "${red}Call Logs: Retrieved${reset}"
 echo -e "${red}Account Access: Granted${reset}"
 echo -e "${blue}--------------------------------------${reset}"
-echo -e "${red}NOTE: This is a prank tool. No real hacking is happening!${reset}"
+echo -e "${red}View more about this tool visit : yshzap.vercel.app !${reset}"
