@@ -16,109 +16,84 @@ banner() {
     echo -e "${blue}--------------------------------------${reset}"
 }
 
-# Function to show a progress bar
-progress_bar() {
-    bar="█████████████████████████"
-    for ((i=0; i<=20; i++)); do
-        echo -ne "${green}[${bar:0:$i}>${bar:$i:20}] $(( (i+1) * 5 ))%\r${reset}"
-        sleep 0.2
-    done
-    echo -e "\n"
-}
+# Super-fast hacking progress
+fast_hacking_progress() {
+    steps=(
+        "Scanning target device..."
+        "Bypassing firewall..."
+        "Injecting malware..."
+        "Exploiting vulnerabilities..."
+        "Accessing database..."
+        "Fetching login credentials..."
+        "Decrypting messages..."
+        "Cracking WiFi WPA2 keys..."
+        "Extracting call logs..."
+        "Retrieving deleted messages..."
+        "Activating keylogger..."
+        "Hijacking webcam..."
+        "Fetching GPS location..."
+        "Spoofing MAC address..."
+        "Connecting to Deep Web..."
+        "Sending data to darknet..."
+    )
 
-# Function to generate fake random text
-random_text() {
-    head /dev/urandom | tr -dc 'A-Za-z0-9!@#$%^&*()_+' | head -c 25
-}
-
-# Function to generate random passwords
-generate_passwords() {
-    echo -e "${red}Fake Leaked Passwords:${reset}"
-    for i in {1..5}; do
-        fake_pass=$(random_text)
-        echo -e "${yellow} - user$i: $fake_pass${reset}"
-    done
-}
-
-# Function to display a fake hacking animation
-hacking_animation() {
-    end=$((SECONDS+60))
-    while [ $SECONDS -lt $end ]; do
-        echo -e "${green}[$SECONDS sec] Processing: $(random_text)${reset}"
-        sleep 0.5
+    start_time=$(date +%s)
+    while [ $(($(date +%s) - start_time)) -lt 20 ]; do
+        step=${steps[$RANDOM % ${#steps[@]}]}
+        echo -e "${blue}[+] $step${reset}"
+        sleep 0.1
     done
 }
 
-# Function to display random hacker quotes
-hacker_quotes() {
-    quotes=("Access Granted."
-            "Bypassing Firewall..."
-            "Connecting to Deep Web Servers..."
-            "Decrypting Passwords..."
-            "Exploiting Vulnerabilities..."
-            "Establishing Backdoor Connection..."
-            "System Breached!")
-    echo -e "${blue}[+] ${quotes[$RANDOM % ${#quotes[@]}]}${reset}"
+# Matrix-style letter rain animation
+letter_rain() {
+    chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*"
+    for ((i=0; i<20; i++)); do
+        line=""
+        for ((j=0; j<60; j++)); do
+            line+="${chars:RANDOM % ${#chars}:1} "
+        done
+        echo -e "${green}$line${reset}"
+        sleep 0.03
+    done
 }
 
-# Function to hack a phone number (Fake)
+# Fake Phone Number Hack
 hack_phone() {
     banner
     read -p "Enter target phone number: " target
     echo -e "${yellow}Initializing hack on $target ...${reset}"
-    sleep 2
-    progress_bar
-
-    # Hacking Stages
-    stages=("Bypassing Firewall"
-            "Accessing Database"
-            "Decrypting Messages"
-            "Retrieving Call Logs"
-            "Extracting Account Credentials"
-            "Finalizing Exploit")
-
-    for stage in "${stages[@]}"; do
-        hacker_quotes
-        sleep 2
-    done
-
-    hacking_animation
-    generate_passwords
-
-    echo -e "${green}100% Cracking Successful!${reset}"
     sleep 1
+    fast_hacking_progress
+    sleep 1
+    letter_rain
+
+    echo -e "${green}100% PHONE HACK SUCCESS!${reset}"
     echo -e "${yellow}Target Number: $target${reset}"
     echo -e "${red}Database Breached: YES${reset}"
-    echo -e "${red}Encrypted Messages: Cracked${reset}"
+    echo -e "${red}Messages: Decrypted${reset}"
     echo -e "${red}Call Logs: Retrieved${reset}"
-    echo -e "${red}Account Access: Granted${reset}"
-    echo -e "${blue}--------------------------------------${reset}"
-    echo -e "${red}Visit: yshzap.vercel.app ! - いたずらです${reset}"
+    echo -e "${red}Live GPS Location: Tracked${reset}"
     read -p "Press Enter to return to menu..."
 }
 
-# Function to hack WiFi (Fake)
+# Fake WiFi Hack
 hack_wifi() {
     banner
     read -p "Enter target WiFi name: " wifi
     echo -e "${yellow}Scanning network $wifi ...${reset}"
-    sleep 2
-    progress_bar
-
-    echo -e "${green}[+] Network Exploit Found!${reset}"
     sleep 1
-    echo -e "${red}Cracking WPA2 Encryption...${reset}"
-    sleep 3
-    hacking_animation
-    generate_passwords
+    fast_hacking_progress
+    sleep 1
+    letter_rain
 
-    echo -e "${green}WiFi Hack Successful!${reset}"
+    echo -e "${green}100% WiFi HACK SUCCESS!${reset}"
     echo -e "${yellow}Target WiFi: $wifi${reset}"
-    echo -e "${red}Password: $(random_text)${reset}"
+    echo -e "${red}Password: P@ssw0rd123${reset}"
     read -p "Press Enter to return to menu..."
 }
 
-# Function to hack social media (Fake)
+# Fake Social Media Hack
 hack_social() {
     banner
     echo -e "${blue}Select social media to hack:${reset}"
@@ -132,32 +107,62 @@ hack_social() {
     if [[ "$social_choice" == "5" ]]; then return; fi
 
     echo -e "${yellow}Fetching login data...${reset}"
-    sleep 2
-    progress_bar
+    sleep 1
+    fast_hacking_progress
+    sleep 1
+    letter_rain
 
-    echo -e "${red}Exploiting 2FA Security...${reset}"
-    sleep 3
-    hacking_animation
-    generate_passwords
-
-    echo -e "${green}Social Media Hack Successful!${reset}"
+    echo -e "${green}100% SOCIAL MEDIA HACK SUCCESS!${reset}"
     echo -e "${yellow}Username: target_user${reset}"
-    echo -e "${red}Password: $(random_text)${reset}"
+    echo -e "${red}Password: H@ckedUser123${reset}"
     read -p "Press Enter to return to menu..."
 }
 
-# Function to scan system info (Fake)
-scan_system() {
+# Fake IP Tracker
+track_ip() {
     banner
-    echo -e "${yellow}Scanning device information...${reset}"
-    sleep 3
-    progress_bar
+    read -p "Enter IP address to track: " ip
+    echo -e "${yellow}Tracking IP $ip ...${reset}"
+    sleep 1
+    fast_hacking_progress
+    sleep 1
+    letter_rain
 
-    echo -e "${green}Device: iPhone 15 Pro Max${reset}"
-    echo -e "${green}OS: iOS 17.2${reset}"
-    echo -e "${green}IP Address: 192.168.1.$((RANDOM % 255))${reset}"
-    echo -e "${green}Location: Unknown (VPN Active)${reset}"
-    echo -e "${green}Status: Compromised${reset}"
+    echo -e "${green}100% IP TRACE SUCCESS!${reset}"
+    echo -e "${yellow}IP Address: $ip${reset}"
+    echo -e "${red}Location: Dark Web Proxy (Hidden)${reset}"
+    echo -e "${red}ISP: Anonymous Proxy${reset}"
+    read -p "Press Enter to return to menu..."
+}
+
+# Fake Webcam Hack
+hack_webcam() {
+    banner
+    read -p "Enter target device IP: " ip
+    echo -e "${yellow}Accessing webcam of $ip ...${reset}"
+    sleep 1
+    fast_hacking_progress
+    sleep 1
+    letter_rain
+
+    echo -e "${green}100% WEBCAM ACCESS SUCCESS!${reset}"
+    echo -e "${yellow}Live Video Feed: ENABLED${reset}"
+    echo -e "${red}Face Recognition: ACTIVE${reset}"
+    read -p "Press Enter to return to menu..."
+}
+
+# Fake Deep Web Exploit
+deep_web() {
+    banner
+    echo -e "${yellow}Connecting to Deep Web servers...${reset}"
+    sleep 1
+    fast_hacking_progress
+    sleep 1
+    letter_rain
+
+    echo -e "${green}ACCESS TO DEEP WEB GRANTED!${reset}"
+    echo -e "${yellow}Anonymized Network: ON${reset}"
+    echo -e "${red}Hidden Exploit Logs: ENABLED${reset}"
     read -p "Press Enter to return to menu..."
 }
 
@@ -168,16 +173,20 @@ while true; do
     echo -e "${yellow}1. Hack a Phone Number"
     echo -e "2. Hack WiFi Password"
     echo -e "3. Hack Social Media"
-    echo -e "4. Scan System Information"
-    echo -e "5. Exit${reset}"
+    echo -e "4. Track an IP Address"
+    echo -e "5. Hack a Webcam"
+    echo -e "6. Access Deep Web"
+    echo -e "7. Exit${reset}"
     read -p "Choose an option: " choice
 
     case $choice in
         1) hack_phone ;;
         2) hack_wifi ;;
         3) hack_social ;;
-        4) scan_system ;;
-        5) echo -e "${red}Exiting...${reset}"; exit ;;
+        4) track_ip ;;
+        5) hack_webcam ;;
+        6) deep_web ;;
+        7) echo -e "${red}Exiting...${reset}"; exit ;;
         *) echo -e "${red}Invalid option! Try again.${reset}"; sleep 2 ;;
     esac
 done
