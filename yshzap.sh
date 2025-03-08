@@ -18,7 +18,7 @@ banner() {
     clear
     center_text "${a} █▄█ █▀ █░█ ▀█ ▄▀█ █▀█ ${e}"
     center_text "${b} ░█░ ▄█ █▀█ █▄ █▀█ █▀▀ ${e}"
-    center_text "${a} Y'SHZ∆P - By VK🦊 ${e}"
+    center_text "${a} Y'SHZ∆P - By Vaishnav🦊 ${e}"
     center_text "${b} --------------------------- ${e}"
     sleep 0.3
   done
