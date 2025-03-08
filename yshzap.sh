@@ -36,7 +36,7 @@ banner() {
   clear
   echo -e "${red} █▄█ █▀ █░█ ▀█ ▄▀█ █▀█ ${reset}"
   echo -e "${blue} ░█░ ▄█ █▀█ █▄ █▀█ █▀▀ ${reset}"
-  echo -e "${red} Y'SHZ∆P Tool - By Vaishnav🦊 ${reset}"
+  echo -e "${red} Y'SHZ∆P Tool - By Vaishnav🦊 (いたずらです)${reset}"
   echo -e "${blue} -------------------------------------- ${reset}"
   sleep 1
 }
