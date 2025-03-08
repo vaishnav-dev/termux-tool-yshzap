@@ -1,140 +1,126 @@
 #!/bin/bash
 
-a="\e[31m"
-b="\e[34m"
-c="\e[33m"
-d="\e[32m"
-e="\e[0m"
-
-center_text() {
-  term_width=$(tput cols)
-  text="$1"
-  padding=$(( (term_width - ${#text}) / 2 ))
-  printf "%*s%s%*s\n" "$padding" "" "$text" "$padding" ""
-}
+red="\e[31m"
+blue="\e[34m"
+yellow="\e[33m"
+green="\e[32m"
+reset="\e[0m"
 
 banner() {
-  for i in {1..3}; do
-    clear
-    center_text "${a} █▄█ █▀ █░█ ▀█ ▄▀█ █▀█ ${e}"
-    center_text "${b} ░█░ ▄█ █▀█ █▄ █▀█ █▀▀ ${e}"
-    center_text "${a} Y'SHZ∆P - By Vaishnav🦊 ${e}"
-    center_text "${b} --------------------------- ${e}"
-    sleep 0.3
-  done
+  clear
+  echo -e "${red} █▄█ █▀ █░█ ▀█ ▄▀█ █▀█ ${reset}"
+  echo -e "${blue} ░█░ ▄█ █▀█ █▄ █▀█ █▀▀ ${reset}"
+  echo -e "${red} Y'SHZ∆P Tool - By Vaishnav🦊 ${reset}"
+  echo -e "${blue} -------------------------------------- ${reset}"
+  sleep 0.5
 }
 
-progress() {
-  for i in {1..20}; do
-    echo -ne "${b}[+] Connecting${e}"; sleep 0.1
-    for j in {1..3}; do echo -ne "."; sleep 0.1; done
-    echo ""
-    echo -e "${c}[~] Running...${e}"
-    sleep 0.5
-    echo -e "${d}[✓] Success: ${a}0x$(openssl rand -hex 3)${e}"
-    sleep 0.5
-  done
-}
-
-loading_bar() {
-  echo -ne "${b}[+] Progress: ${e}"
-  for i in {1..100}; do
+progress_bar() {
+  echo -ne "${blue}[+] Processing: ${reset}"
+  for i in {1..30}; do
     echo -ne "█"
-    sleep 0.$((RANDOM % 3))
+    sleep 0.05
   done
   echo ""
 }
 
-dump_info() {
-  echo -e "${a}--------------------------------------${e}"
-  echo -e "${b}[*] Data stream initiated...${e}"
-  sleep 1
-  cat <<EOF
-[+] >> 0x$(openssl rand -hex 6) :: PROC_ID=$(shuf -i 1000-9999 -n 1)
-[+] >> UUID=$(openssl rand -hex 8)
-[+] >> SYS_MODE: $(shuf -i 0-5 -n 1) | KERNEL::0x$(openssl rand -hex 4)
-[+] >> MEM_ALLOC: $(shuf -i 100-999 -n 1)MB | CACHE=$(shuf -i 50-500 -n 1)MB
-[+] >> NET_IFACE: eth$(shuf -i 0-9 -n 1) | MAC=00:$(openssl rand -hex 1):$(openssl rand -hex 1):$(openssl rand -hex 1):$(openssl rand -hex 1)
-[+] >> GPS_LOC: $(shuf -i 10-90 -n 1).$(shuf -i 100000-999999 -n 1), $(shuf -i 10-90 -n 1).$(shuf -i 100000-999999 -n 1)
-[+] >> IO_DEVICE: /dev/sd$(shuf -i 0-3 -n 1) | SIZE=$(shuf -i 10-100 -n 1)GB
-[+] >> TASKS_RUNNING: $(shuf -i 10-100 -n 1) | THREADS=$(shuf -i 50-500 -n 1)
-[+] >> LAST_SYNC: 0x$(openssl rand -hex 8)
-[+] >> ARCH: ARMv$(shuf -i 5-8 -n 1) | LINUX_VERSION=$(shuf -i 3-6 -n 1).$(shuf -i 10-99 -n 1)
-[+] >> BOOT_TIME: $(shuf -i 1000000000-2000000000 -n 1) UNIX
-[+] >> ERR_CODE: 0x$(openssl rand -hex 4)
-[+] >> DBG_FLAG: 0x$(openssl rand -hex 2)
-[+] >> ACTIVE_SESSIONS: $(shuf -i 1-5 -n 1)
-[+] >> RECENT_CMDS: 0x$(openssl rand -hex 6), 0x$(openssl rand -hex 6), 0x$(openssl rand -hex 6)
-[+] >> HASH_AUTH: $(openssl rand -hex 16)
-[+] >> TEMP_REG: $(shuf -i 30-80 -n 1)°C
-[+] >> API_RESPONSE: 0x$(openssl rand -hex 8)
-[+] >> CHKSUM: $(openssl rand -hex 12)
-[+] >> PERM_ERR: FALSE
-[+] >> DEBUG_MODE: ENABLED
-[+] >> FILE_SYS: /mnt/data/$(openssl rand -hex 4).bin
-[+] >> THREAD_LOCK: $(shuf -i 1-3 -n 1)
-[+] >> MSG_QUEUE: $(shuf -i 10-50 -n 1)
-[+] >> MEM_FRAG: $(shuf -i 1-99 -n 1)%
-[+] >> SYS_LOAD: $(shuf -i 1-10 -n 1).$(shuf -i 0-9 -n 1)
-[+] >> I/O OPS: $(shuf -i 1000-9999 -n 1)
-[+] >> SECURE_FLAGS: 0x$(openssl rand -hex 4)
-[+] >> CPU_STATE: $(shuf -i 0-100 -n 1)%
-EOF
-  echo -e "${a}--------------------------------------${e}"
+random_hex() {
+  openssl rand -hex 3
 }
 
-fake_hack() {
-  read -p "Enter target: " target
-  echo -e "${c}Initializing on $target ...${e}"
-  sleep 1
-  progress
-  loading_bar
-  echo -e "${d}[✓] Complete!${e}"
-  dump_info
-  read -p "Press Enter..."
+hacking_animation() {
+  for i in {1..5}; do
+    echo -ne "${blue}[+] Establishing link"; sleep 0.1
+    for j in {1..3}; do echo -ne "."; sleep 0.1; done
+    echo -e " ${yellow}$(random_hex)${reset}"
+    sleep 0.3
+  done
 }
 
-network_scan() {
-  read -p "Enter network: " net
-  echo -e "${c}Scanning $net ...${e}"
-  sleep 1
-  progress
-  loading_bar
-  echo -e "${d}[✓] Done!${e}"
-  dump_info
-  read -p "Press Enter..."
+real_hacker_run() {
+  local start=$(date +%s)
+  while [ $(( $(date +%s) - start )) -lt 15 ]; do
+    echo -e "${blue}[+] Terminal output: $(random_hex) $(openssl rand -hex 4) $(date +%T)"
+    sleep 1
+  done
 }
 
-custom_option() {
-  echo -e "${c}Choose:${e}"
-  echo -e "1. A"
-  echo -e "2. B"
-  echo -e "3. C"
-  read -p "Option: " opt
-  echo -e "${c}Fetching...${e}"
+fake_details() {
+  echo -e "${yellow}--- Data Extracted ---${reset}"
+  echo -e "ID: $(echo $RANDOM$RANDOM)"
+  echo -e "Session Token: $(random_hex)$(random_hex)"
+  echo -e "OS Build: $(echo $RANDOM | md5sum | head -c6)"
+  echo -e "Kernel Ver.: $(uname -r)"
+  echo -e "Boot ID: $(uuidgen)"
+  echo -e "Last Access: $(date)"
+  echo -e "Geo Coord: $(shuf -i -90-90 -n 1), $(shuf -i -180-180 -n 1)"
+  echo -e "IMEI: $(shuf -i 100000000000000-999999999999999 -n 1)"
+  echo -e "Device Model: XJ-$(shuf -i 100-999 -n 1)"
+  echo -e "Serial No.: $(date +%s)$RANDOM"
+  echo -e "CPU: $(lscpu | grep 'Model name' | cut -d: -f2)"
+  echo -e "GPU: $(lspci | grep -i vga | cut -d: -f3)"
+  echo -e "RAM: $(shuf -i 4-64 -n 1)GB"
+  echo -e "Disk ID: $(random_hex)$(random_hex)"
+  echo -e "Active Ports: $(shuf -i 20-80 -n 1) open"
+  echo -e "File Count: $(shuf -i 100-1000 -n 1)"
+  echo -e "Net Latency: $(shuf -i 10-100 -n 1)ms"
+  echo -e "Conn Speed: $(shuf -i 50-1000 -n 1)Mbps"
+  echo -e "ISP: FiberXNet"
+  echo -e "DNS: 8.8.8.8, 8.8.4.4"
+  echo -e "MAC: $(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/:$//')"
+  echo -e "Firewall: Active"
+  echo -e "Intrusions: $(shuf -i 0-50 -n 1)"
+  echo -e "Encryption: AES-256"
+  echo -e "Bluetooth: $(random_hex)"
+  echo -e "Installed Apps: AppX, AppY, AppZ"
+  echo -e "Location Zone: Beta"
+  echo -e "Mode: X-Active"
+  echo -e "Virtualization: Enabled"
+  echo -e "Proxy: 192.168.$((RANDOM % 255)).$((RANDOM % 255))"
+  echo -e "Antivirus: None Detected"
+  echo -e "History: Crawled"
+  echo -e "Cache: $(shuf -i 100-1000 -n 1)MB"
+  echo -e "Uptime: $(shuf -i 1-72 -n 1) hrs"
+  echo -e "Secret Key: $(random_hex)$(shuf -i 1000-9999 -n 1)"
+  echo -e "Debug Log: $(random_hex)"
+  echo -e "Data Stream 1: $(openssl rand -hex 2)"
+  echo -e "Data Stream 2: $(openssl rand -hex 2)"
+  echo -e "Data Stream 3: $(openssl rand -hex 2)"
+  echo -e "Data Stream 4: $(openssl rand -hex 2)"
+  echo -e "Data Stream 5: $(openssl rand -hex 2)"
+  echo -e "Random Byte 1: $(od -An -N1 -tx1 /dev/urandom | tr -d ' ')"
+  echo -e "Random Byte 2: $(od -An -N1 -tx1 /dev/urandom | tr -d ' ')"
+  echo -e "Random Byte 3: $(od -An -N1 -tx1 /dev/urandom | tr -d ' ')"
+  echo -e "Obfuscated Data: $(openssl rand -hex 4)"
+  echo -e "${yellow}-----------------------------${reset}"
   sleep 1
-  progress
-  loading_bar
-  echo -e "${d}[✓] Success!${e}"
-  dump_info
-  read -p "Press Enter..."
 }
 
-banner
+hack_target() {
+  read -p "Enter identifier: " target
+  echo -e "${yellow}Connecting to $target...${reset}"
+  sleep 1
+  progress_bar
+  hacking_animation
+  real_hacker_run
+  fake_details
+  echo -e "${green}[✓] Process Complete!${reset}"
+  read -p "Press Enter to return to menu..."
+}
 
-while true; do
-  echo -e "${b}Menu:${e}"
-  echo -e "${c}1. Fake Hack"
-  echo -e "2. Network Scan"
-  echo -e "3. Custom Option"
-  echo -e "4. Exit${e}"
-  read -p "Choose: " choice
+main_menu() {
+  while true; do
+    clear
+    banner
+    echo -e "${green}1. Start${reset}"
+    echo -e "${green}2. Exit${reset}"
+    read -p "Select option: " option
+    case $option in
+      1) hack_target ;;
+      2) echo -e "${red}Goodbye!${reset}"; exit ;;
+      *) echo -e "${red}Invalid option!${reset}"; sleep 1 ;;
+    esac
+  done
+}
 
-  case $choice in
-    1) fake_hack ;;
-    2) network_scan ;;
-    3) custom_option ;;
-    4) echo -e "${a}Exit...${e}"; exit ;;
-    *) echo -e "${a}Invalid!${e}"; sleep 2 ;;
-  esac
-done
+main_menu
